@@ -1,0 +1,115 @@
+\documentclass[
+a4paper, 
+11pt
+]{article}
+
+%%%%%%%%%% Pacotes usados nesse documento %%%%%%%%%%
+\usepackage[
+lmargin = 3cm, 
+tmargin = 3cm, 
+rmargin = 2cm, 
+bmargin = 2cm
+]{geometry}
+\usepackage{float} % Posicionamente de tabelas
+\usepackage{amsmath} % Equações matemáticas
+\usepackage{textcomp, gensymb} % Símbolos matemáticos, por exemplo \degree
+\usepackage{multirow} % Para tabelas com células mescladas
+\usepackage{array} % Tabelas com colunas de largura fixa 
+\usepackage{enumitem} % Retirar identação do espaço \begin{itemize}
+\usepackage{graphicx} % Utilizar imagens
+\usepackage[brazil]{babel} % Texto automáticos serão gerados em português, por exemplo Tabela ao invés de Table.
+\usepackage{datetime2} % Para obter o ano atual
+
+% Formatação do texto no título de seções do documento
+\usepackage[explicit]{titlesec}
+\titleformat{\section}{\normalfont\Large\scshape}{}{0em}{#1\ \thesection}
+
+% Definindo novas cores
+\usepackage{color}
+\definecolor{bblue}{rgb}{0.54,0.81,0.94}
+
+% Utilizando ancoras de referência
+\usepackage{hyperref}
+\hypersetup{
+colorlinks = true,
+linkcolor = bblue,
+anchorcolor = bblue,
+citecolor = bblue,
+filecolor = bblue,
+urlcolor = bblue
+}
+
+ \DeclareMathOperator{\sen}{sen}
+
+%%%%%%%%%% Início do documento %%%%%%%%%%
+\begin{document}
+\DTMsavenow{mytoday}
+
+% Capa do Relatório
+\begin{titlepage}
+\begin{figure}
+\centering
+\includegraphics[width=3cm]{images/logo-ufc.png}
+\end{figure}
+\begin{center}
+{\large \sc \noindent
+{\LARGE Universidade Federal do Ceará} \\[0.5cm]
+{Centro de Tecnologia} \\[0.5cm]
+{Departamento de Engenharia de Teleinformática} \\[0.5cm]
+{Introdução ao Processamento Digital de Imagens} \\[0.5cm]
+{\DTMfetchday{mytoday}-\DTMfetchmonth{mytoday}-\DTMfetchyear{mytoday}} \\[4.0cm]
+}
+\end{center} 
+\begin{center}
+{\huge \sc \noindent Projeto 1 \\[0.5cm] Comparação das Filtragens nos Domínios Espacial e da Frequência} \\[3.0cm]
+\end{center}
+\begin{flushleft}
+{\large \sc \noindent Aluno: Bruno Said Alves de Souza} \\[0.2cm]
+{\large \sc \noindent Matrícula: 547860} \\[0.2cm]
+{\large \sc \noindent Curso: Engenharia de Computação} \\[0.2cm]
+{\large \sc \noindent Turma: TIO176 - T01} \\[0.2cm]
+{\large \sc \noindent Professor: Paulo Cesar Cortez}
+\end{flushleft}
+\vspace*{\fill}
+\begin{center}
+{\large \sc \noindent
+{Fortaleza} \\[0.2cm]
+{\DTMfetchyear{mytoday}}
+}
+\end{center}
+\end{titlepage}
+
+\section{Discussão Técnica}
+Podemos aplicar filtro as imagens tanto no domínio do espaço como no domínio da 
+frequência. Além disso, podemos criar a mesma filtragem no domínio do espaço no
+domínio da frequência usando a Tranformada de Fourier. Nesse projeto vamos criar
+as menas images que serião criadas pelos filtro Laplaciano espacial. Para
+realizar esse operação nos pricedemos da seguinte maneira.
+
+\begin{itemize}
+  \item Obter a imagem M x N que se deseja aplicar o filtro.
+  \item Expandir a imagem para P x Q. Geralmente P = 2M e Q = 2N.
+  \item Aplicar a Transformada de Fourier a imagem expandidad.
+  \item Expandir o filtro no domínio do espaço para a mesma dimenção P x Q.
+  \item Aplicar a Tranformada de Fourier ao filtro expandido.
+  \item Multiplicar os dois filtro pela multiplicação de Hadamard, ou seja, 
+  item por item.
+  \item Aplicar a Transformada Inversa no resultado obtido
+  \item Recordar a imagem M x N
+  \item Resultado final encotrado
+\end{itemize}
+
+Todos esses paços foram aplicados na imagem a seguir.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width = 15cm]{"./images/moons.png"}
+\end{figure}
+
+\section{Conclusões}
+Podemos concluir que as imagens finais são identicas as geradas pelo filtro no
+domínio espacial. Sendo assim, uma vantegem da troca de domínios é a velocidade
+no precessamento da imagem pois qualquer um dos filtros pode ser obtido nos em
+qualquer um dos dois domínios.
+
+\end{document}
